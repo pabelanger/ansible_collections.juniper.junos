@@ -20,6 +20,9 @@ from ansible.module_utils.network.common import utils
 from ansible_collections.juniper.junos.plugins.module_utils.network.junos.argspec.lldp_interfaces.lldp_interfaces import (
     Lldp_interfacesArgs,
 )
+from ansible_collections.juniper.junos.plugins.module_utils.network.junos.utils.utils import (
+    get_resource_config,
+)
 from ansible.module_utils.six import string_types
 
 try:
@@ -70,7 +73,7 @@ class Lldp_interfacesFacts(object):
                     </protocols>
                 </configuration>
                 """
-            data = connection.get_configuration(filter=config_filter)
+            data = get_resource_config(connection, config_filter=config_filter)
 
         if isinstance(data, string_types):
             data = etree.fromstring(

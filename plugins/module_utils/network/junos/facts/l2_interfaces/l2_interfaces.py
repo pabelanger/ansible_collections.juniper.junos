@@ -20,6 +20,9 @@ from ansible.module_utils.network.common import utils
 from ansible_collections.juniper.junos.plugins.module_utils.network.junos.argspec.l2_interfaces.l2_interfaces import (
     L2_interfacesArgs,
 )
+from ansible_collections.juniper.junos.plugins.module_utils.network.junos.utils.utils import (
+    get_resource_config,
+)
 from ansible.module_utils.six import string_types
 
 try:
@@ -65,7 +68,7 @@ class L2_interfacesFacts(object):
                     <interfaces/>
                 </configuration>
                 """
-            data = connection.get_configuration(filter=config_filter)
+            data = get_resource_config(connection, config_filter=config_filter)
 
         if isinstance(data, string_types):
             data = etree.fromstring(

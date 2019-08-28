@@ -26,6 +26,9 @@ from ansible_collections.juniper.junos.plugins.module_utils.network.junos.junos 
     discard_changes,
     tostring,
 )
+from ansible_collections.juniper.junos.plugins.module_utils.network.junos.utils.utils import (
+    get_resource_config,
+)
 from ansible.module_utils.network.common.netconf import (
     build_root_xml_node,
     build_child_xml_node,
@@ -179,7 +182,9 @@ class Lag_interfaces(ConfigBase):
                 <interfaces/>
             </configuration>
             """
-        data = self._connection.get_configuration(filter=config_filter)
+        data = get_resource_config(
+            self._connection, config_filter=config_filter
+        )
 
         for config in want:
             lag_name = config["name"]
