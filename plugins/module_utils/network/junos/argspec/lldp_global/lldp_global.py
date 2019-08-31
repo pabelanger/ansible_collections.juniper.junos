@@ -41,7 +41,7 @@ class Lldp_globalArgs(object):
         "config": {
             "options": {
                 "address": {"type": "str"},
-                "enable": {"type": "bool"},
+                "enabled": {"type": "bool"},
                 "hold_multiplier": {"type": "int"},
                 "interval": {"type": "int"},
                 "transmit_delay": {"type": "int"},
