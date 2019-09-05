@@ -6,28 +6,6 @@
 """
 The arg spec for the junos facts module.
 """
-CHOICES = [
-    "all",
-    "!all",
-    "interfaces",
-    "!interfaces",
-    "lacp",
-    "!lacp",
-    "lacp_interfaces",
-    "!lacp_interfaces",
-    "lag_interfaces",
-    "!lag_interfaces",
-    "l2_interfaces",
-    "!l2_interfaces",
-    "l3_interfaces",
-    "!l3_interfaces",
-    "lldp_global",
-    "!lldp_global",
-    "lldp_interfaces",
-    "!lldp_interfaces",
-    "vlans",
-    "!vlans",
-]
 
 
 class FactsArgs(object):
@@ -42,5 +20,5 @@ class FactsArgs(object):
         "config_format": dict(
             default="text", choices=["xml", "text", "set", "json"]
         ),
-        "gather_network_resources": dict(choices=CHOICES, type="list"),
+        "gather_network_resources": dict(type="list"),
     }
