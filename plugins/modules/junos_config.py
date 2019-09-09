@@ -464,7 +464,10 @@ def main():
                 diff = configure_device(module, warnings, candidate)
                 if diff:
                     if commit:
-                        kwargs = {"comment": module.params["comment"]}
+                        kwargs = {
+                            "comment": module.params["comment"],
+                            "check": module.params["check_commit"],
+                        }
 
                         confirm = module.params["confirm"]
                         if confirm > 0:
