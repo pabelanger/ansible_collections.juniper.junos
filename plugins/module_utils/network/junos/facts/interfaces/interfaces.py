@@ -121,7 +121,7 @@ class InterfacesFacts(object):
         )
         disable = utils.get_xml_conf_arg(conf, "disable", data="tag")
         if disable:
-            config["enable"] = False
+            config["enabled"] = False
         else:
-            config["enable"] = True
+            config["enabled"] = True
         return utils.remove_empties(config)

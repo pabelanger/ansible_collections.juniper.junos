@@ -41,7 +41,7 @@ class Lldp_interfacesArgs(object):
         "config": {
             "elements": "dict",
             "options": {
-                "enable": {"type": "bool"},
+                "enabled": {"type": "bool"},
                 "name": {"required": True, "type": "str"},
             },
             "type": "list",
