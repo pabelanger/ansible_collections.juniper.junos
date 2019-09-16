@@ -46,7 +46,7 @@ class InterfacesArgs(object):
                     "choices": ["automatic", "full-duplex", "half-duplex"],
                     "type": "str",
                 },
-                "enable": {"default": True, "type": "bool"},
+                "enabled": {"default": True, "type": "bool"},
                 "hold_time": {
                     "options": {
                         "down": {"type": "int"},
