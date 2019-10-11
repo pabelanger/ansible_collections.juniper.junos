@@ -19,7 +19,7 @@ from ansible_collections.juniper.junos.plugins.module_utils.network.junos.junos 
     get_configuration,
     get_capabilities,
 )
-from ansible.module_utils._text import to_native
+from ansible.module_utils._text import to_text
 
 
 try:
@@ -52,14 +52,14 @@ class FactsBase(object):
             self.module.fail_json(
                 msg="failed to retrieve facts for command %s" % command
             )
-        return str(output.text).strip()
+        return to_text(output.text).strip()
 
     def rpc(self, rpc):
         return exec_rpc(self.module, tostring(Element(rpc)))
 
     def get_text(self, ele, tag):
         try:
-            return str(ele.find(tag).text).strip()
+            return to_text(ele.find(tag).text).strip()
         except AttributeError:
             pass
 
@@ -215,7 +215,7 @@ class OFacts(FactsBase):
             device.timeout = get_param(module, "timeout") or 10
         except ConnectError as exc:
             module.fail_json(
-                "unable to connect to %s: %s" % (host, to_native(exc))
+                "unable to connect to %s: %s" % (host, to_text(exc))
             )
 
         return device
