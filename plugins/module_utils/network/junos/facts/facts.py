@@ -10,13 +10,15 @@ calls the appropriate facts gathering function
 """
 
 from ansible.module_utils.network.common.facts.facts import FactsBase
+from ansible_collections.juniper.junos.plugins.module_utils.network.junos.junos import (
+    HAS_PYEZ,
+)
 from ansible_collections.juniper.junos.plugins.module_utils.network.junos.facts.legacy.base import (
     Default,
     Hardware,
     Config,
     Interfaces,
     OFacts,
-    HAS_PYEZ,
 )
 from ansible_collections.juniper.junos.plugins.module_utils.network.junos.facts.interfaces.interfaces import (
     InterfacesFacts,
