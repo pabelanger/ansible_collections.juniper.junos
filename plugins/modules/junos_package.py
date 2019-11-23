@@ -93,6 +93,20 @@ options:
     type: bool
     default: False
     version_added: 2.8
+  ssh_private_key_file:
+    description:
+      - The C(ssh_private_key_file) argument is path to the SSH private key file.
+        This can be used if you need to provide a private key rather than loading
+        the key into the ssh-key-ring/environment
+    type: path
+    version_added: '2.10'
+  ssh_config:
+    description:
+      - The C(ssh_config) argument is path to the SSH configuration file.
+        This can be used to load SSH information from a configuration file.
+        If this option is not given by default ~/.ssh/config is queried.
+    type: path
+    version_added: '2.10'
 requirements:
   - junos-eznc
   - ncclient (>=v0.5.2)
@@ -101,6 +115,10 @@ notes:
     the remote device being managed.
   - Tested against vSRX JUNOS version 15.1X49-D15.4, vqfx-10000 JUNOS Version 15.1X53-D60.4.
   - Works with C(local) connections only.
+  - Since this module uses junos-eznc to establish connection with junos
+    device the netconf configuration parameters needs to be passed
+    using module options for example C(ssh_config) unlike other junos
+    modules that uses C(netconf) connection type.
 """
 
 EXAMPLES = """
@@ -115,6 +133,11 @@ EXAMPLES = """
   junos_package:
     src: junos-vsrx-12.1X46-D10.2-domestic.tgz
     reboot: no
+
+- name: install local package on remote device with jumpost
+  junos_package:
+    src: junos-vsrx-12.1X46-D10.2-domestic.tgz
+    ssh_config: /home/user/customsshconfig
 """
 from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.juniper.junos.plugins.module_utils.network.junos.junos import (
@@ -172,6 +195,8 @@ def main():
         transport=dict(default="netconf", choices=["netconf"]),
         force_host=dict(type="bool", default=False),
         issu=dict(type="bool", default=False),
+        ssh_private_key_file=dict(type="path"),
+        ssh_config=dict(type="path"),
     )
 
     argument_spec.update(junos_argument_spec)
