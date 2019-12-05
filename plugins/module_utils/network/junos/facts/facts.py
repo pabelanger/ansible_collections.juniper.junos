@@ -47,6 +47,9 @@ from ansible_collections.juniper.junos.plugins.module_utils.network.junos.facts.
 from ansible_collections.juniper.junos.plugins.module_utils.network.junos.facts.l2_interfaces.l2_interfaces import (
     L2_interfacesFacts,
 )
+from ansible_collections.juniper.junos.plugins.module_utils.network.junos.facts.static_routes.static_routes import (
+    Static_routesFacts,
+)
 
 FACT_LEGACY_SUBSETS = dict(
     default=Default, hardware=Hardware, config=Config, interfaces=Interfaces
@@ -61,6 +64,7 @@ FACT_RESOURCE_SUBSETS = dict(
     lldp_global=Lldp_globalFacts,
     lldp_interfaces=Lldp_interfacesFacts,
     vlans=VlansFacts,
+    static_routes=Static_routesFacts,
 )
 
 
